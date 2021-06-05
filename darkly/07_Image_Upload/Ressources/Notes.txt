@@ -1,0 +1,14 @@
+Sur la page [ip_site]/index.php?page=upload, on peut tenter d'envoyer un fichier php ou un script en le faisant
+passer pour une image. En inspectant le code, on voit que la balise <form> prend deux inputs : uploaded et Upload.
+On utilise alors la commande curl (-F pour form) :
+"curl -F "uploaded=@hack.php;type=image/jpeg" -F "Upload=Upload" [ip_site]/index.php?page=upload | grep flag"
+On obtient ainsi le flag.
+
+Faille :
+Problème de vérification du type MIME.
+Un utilisateur malveillant pourrait injecter une page php sur le site, de là il est libre d'en faire ce qu'il veut !
+
+Fix :
+Vérifier le type de ficher envoyé en back en n'autorisant qu'une liste d'extention et l'abscence de .php entre autres.
+Il faudrait également vérifier la taille et changer le nom (possiblement le hasher ensuite) pour s'assurer de
+ne pas en écraser d'autres dans la base de données.

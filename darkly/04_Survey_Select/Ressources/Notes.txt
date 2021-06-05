@@ -1,0 +1,8 @@
+On inspecte un élément du tableau dans la page http://192.168.0.17/?page=survey, on peut y changer la valeur d'une des options
+du select et obtenir le flag.
+
+Faille :
+On pourrait dans le cadre d'un sondage envoyer une valeure non autorisée, tricher sur un vote...
+
+Fix :
+Vérifier en back la valeur envoyer par l'utilisateur.

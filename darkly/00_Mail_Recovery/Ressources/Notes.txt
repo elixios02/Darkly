@@ -1,0 +1,9 @@
+En examinant le code html de la page [ip_site]/?page=recover, on remarque un hidden input avec le mail webmaster@borntosec.com.
+On peut changer ce dernier afin d'obtenir le flag.
+
+Faille :
+On peut potentiellement obtenir des informations sensibles par mail en y éditant le sien à la place.
+Un script pourrait également être utilisé afin de spam par mail la personne de notre choix via le site.
+
+Fix :
+Faire la gestion d'envoi du mail en back.

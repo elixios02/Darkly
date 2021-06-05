@@ -1,0 +1,10 @@
+On peut regarder les cookies du site par différents moyens (inspecteur -> stockage).
+On en voit un du nom de I_am_admin, avec pour valeur 68934a3e9455fa72420237eb05902327 (false en md5),
+on la change en true (hashé en md5), et nous voilà admin !
+
+Faille :
+Etre admin d'un site...
+
+Fix :
+Ne pas mettre de session dans un cookie (plutôt dans session, le cookie servant uniquement à garder l'id de celle-ci).
+Ne pas utiliser un hash aussi facilement décriptable que du md5.

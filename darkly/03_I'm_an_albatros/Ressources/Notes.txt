@@ -1,0 +1,14 @@
+On click en bas de la page principale sur le BornToSec, on se retrouve avec une superbe musique, un albatros,
+ainsi qu'un long commentaire dans les code html. On peut y trouver les phrases :
+"You must cumming from : "https://www.nsa.gov/" to go to the next step"
+"Let's use this browser : "ft_bornToSec". It will help you a lot."
+Grâce à des extentions, ou avec une commande curl, on peut changer son Referer par "https://www.nsa.gov/"
+et son User-agent par "ft_bornToSec", on obtient ainsi le flag.
+curl -A 'ft_bornToSec' --referer "https://www.nsa.gov/" "http://[ip_site]/?page=e43ad1fdc54babe674da7c7b8f0127bde61de3fbe01def7d00f151c2fcca6d1c"
+
+Faille :
+C'est un problème de header (informations envoyées au site par l'utilisateur).
+Un utilisateur malveillant pourrait en profiter pour faire une attaque shellshock, ou simplement l'utiliser pour s'anonymiser.
+
+Fix :
+Vérifier en back que le User-agent appartienne bien à une liste autorisée au préalable.

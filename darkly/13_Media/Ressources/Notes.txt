@@ -1,0 +1,15 @@
+Sur la page [ip_site]/?page=media&src=nsa on remarque l'utilisation d'une balise <object> sans attribut type,
+au lieu d'une balise <img> attendue. On va donc essayer d'y insérer un script à la place de l'image.
+On encode "<script>alert(42)</script>" en base64, puis on l'écrit dans l'url :
+"[ip_site]/?page=media&src=data:text/html;base64,PHNjcmlwdD5hbGVydCg0Mik8L3NjcmlwdD4="
+et on obtient le flag.
+
+Faille :
+C'est un problème de type XSS car elle permet d'utiliser du script sur le site, par lequel on pourrait récupèrer
+des informations sensibles.
+
+Fix :
+Utiliser les bonnes balises (ici "<img>") ou penser aux attributs important. Et toujours vérifier en back
+les URL envoyées par l'utilisateur.
+On peut aussi mettre l'image dans une base de données et l'appeler par son id, plutôt que de la stocker
+et l'appeler en dur.

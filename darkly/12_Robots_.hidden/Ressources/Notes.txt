@@ -1,0 +1,20 @@
+Sur la page [ip_site]/robots.txt (fichier texte, convention selon laquelle les scripts, comme ceux des moteurs
+de recherche, doivent respecter).
+On voit deux dossiers dont on tente de nous interdire l'accès : "/whatever" et "/.hidden".
+On va maintenant s'intéresser au deuxième. Dans celui-ci des dossiers, qui contiennent des dossiers, et ainsi
+de suite pour finir sur des README. Après quelques tentatives hasardeuses, on se demande si une commande ou un script
+ne pourraient pas nous aider à trouver le flag. On utilise la commande : 
+"wget -e robots=off -r -np --page-requisites --convert-links [ip_site]/.hidden/"
+afin de récupèrer les dossiers du site en local.
+On y fait ensuite un grep -r "flag" sans résultat, celui-ci est peut-être caché sous forme hashé,
+on fait donc "grep -r [0-9]" et on obtient 99dde1d35d1fdd283924d84e6d9f1d820, en le hashant en sha256 on obtient
+la même longueur que les autres flags, on a donc trouvé !
+Une autre manière aurait été de faire un crawler (script qui lit l'arborescence d'un site).
+
+Faille :
+Avoir accès à des dossiers contenants des informations sensibles compromet la sécurité du site.
+
+Fix :
+Comme pour le flag 10, ne pas faire confiance au robots.txt. Il faut également protèger l'accès aux dossiers
+qui ne sont pas censés être publiques, par exemple en utilisant un htacces. En règle générale, il vaut mieux
+stocker ce type d'information sur une base de donnée.

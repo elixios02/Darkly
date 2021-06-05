@@ -1,0 +1,20 @@
+Sur la page [ip_site]/?page=signin, on aimerai pouvoir se connecter avec un compte administrateur.
+On se rappelle avoir vu une liste Member_brute_force lors de nos injections SQL. Nous pourrions
+continuer sur cette méthode, mais pourquoi ne pas tenter une autre manière et ainsi également vérifier
+la résitance du site à un bruteforce ? D'autant plus que le nom nous y incite !
+On créer donc un script qui utilise les mots de passe et nom d'admin les plus courants pour tenter une connexion,
+et on obtient le flag.
+
+
+Faille :
+Premièrement, pouvoir faire des injections SQL peut poser de nombreux soucis que nous avons déjà vu.
+Ensuite, laisser un utilisateur malveillant pouvoir tenter un nombre illimité de connexions peut lui permettre
+de faire des attaques DoS / DDoS. Le conséquences peuvent être encore plus grave s'il arrive à se connecter
+sur un compte administrateur.
+
+
+Fix :
+Protèger les requêtes SQL (voir flags 7 et 9). Limiter les tentatives de connexion / requêtes des utilisateurs.
+Il existe également un grand nombre de solutions offertes afin de se protèger des attaques DoS / DDoS disponnibles
+sur le net. De plus, demander aux utilisateurs du site, et à plus forte raison ceux possédant un compte admin,
+un mot de passe plus complexe.

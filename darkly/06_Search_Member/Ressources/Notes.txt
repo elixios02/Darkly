@@ -1,0 +1,15 @@
+Sur la page [ip_site]/?page=member, après avoir testé la vulnérabilité de la requête SQL, on injecte le code :
+"1 OR 1=1 UNION SELECT column_name, table_name from information_schema.columns"
+On obtient ainsi les informations sur la base de donnée, et plus particulièrement les colones de la base
+"users". On teste différentes requêtes pour finalement injecter :
+"1 UNION SELECT countersign, Commentaire from users"
+Un commentaire nous dit de décrypter 5ff9d0165b4f92b14994e5c685cdce28, de le lower puis de l'encrypter en sh256.
+On obtient donc FortyTwo, puis en minuscule et sha256 pour obtenir le flag.
+
+Faille :
+C'est une injection SQL, qui permet de récupèrer la base de données et les informations sensibles qui peuvent s'y trouver.
+
+Fix :
+Protèger les requêtes SQL en utilisant des PDO. Encrypter les données avec un meilleur hash que le md5.
+Ne pas utiliser de concatenation pour les requêtes SQL. Utiliser un framework (notamment ORM). Ou
+encore vérifier l'input de l'utilisateur.

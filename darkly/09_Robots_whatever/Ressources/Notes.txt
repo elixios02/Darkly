@@ -1,0 +1,14 @@
+Sur la page [ip_site]/robots.txt (fichier texte, convention selon laquelle les scripts, comme ceux des moteurs
+de recherche, doivent respecter).
+On voit deux dossiers dont on tente de nous interdire l'accès : "/whatever" et "/.hidden".
+On s'intéresse au premier, dans celui-ci se trouve un fichier htpasswd qui contient :
+"root:8621ffdbc5698829397d97767ac13db3". Ceci ressemble à login:passwd. On traduit du md5 le hash qui nous donne
+le mot "dragon". Après avoir échoué sur la page de loggin, on l'utilise sur la page "/admin" et on obtient le flag.
+
+Faille :
+Pouvoir se faire passer pour un admin, et simplement avoir ses droits...
+
+Fix :
+Ne pas faire confiance au "robots.txt", ne pas donner de noms aussi explicites pour les pages contenant des
+informations sensible, ne pas utiliser de hash aussi simple que le md5. Et plutôt
+stocker les sessions dans une base de données (garder l'id hashée dans un fichier htaccess).

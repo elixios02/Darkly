@@ -1,0 +1,9 @@
+En examinant le code html de la page principale, on peut voir des redirections différentes sur d'autres sites
+(notement facebook), grâce à la balise <a> et son attribut href. On peut alors changer le contenu après celui-ci
+et obtenir le flag.
+
+Faille :
+Un utilisateur malveillant peut récupèrer la requête http, et changer le lien vers un site frauduleux. C'est du physhing.
+
+Fix :
+Vérifier en back toutes les URLs de redirection (possiblement faire une liste).

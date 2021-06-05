@@ -1,0 +1,9 @@
+Sur la page [ip_site]/?page=feedback, on peut écrire dans l'une des zones de texte le mot
+"script", ce qui nous donne le flag.
+
+Faille :
+Le fait de pouvoir écrire script n'en est pas une à proprement parler, en revanche introduire
+un script grâce à des balises est une faille XSS.
+
+Fix :
+Utiliser un sanitizer lors de la récupération de chaînes de caractères envoyées par un utilisateur.

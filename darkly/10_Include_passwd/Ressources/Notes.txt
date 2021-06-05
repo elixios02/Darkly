@@ -1,0 +1,13 @@
+On peut ajouter à l'url du site "?page=..:" afin de remonter dans l'arborescence des dossiers du site.
+En ajoutant un suffisement grand nombre de "../" on arrive sur le home, puis "/etc/passwd"
+afin d'obtenir le flag.
+
+Faille :
+C'est un problème d'implémentation de la fonction include() en php. Elle affiche le contenu d'une autre page sur
+celle courante.
+Le simple fait de pouvoir remonter les dossiers, avoir accès à la session et tous les fichiers sensibles de linux
+laisse la porte ouverte à un grand nombre d'utilisations frauduleuses.
+
+Fix :
+Créer une liste de pages autorisées, et y vérifier systématiquement si celle qu'on include s'y trouve.
+On peut également interdire l'utilisation des "../" dans l'url.
